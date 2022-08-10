@@ -31,7 +31,9 @@ I have to create .output_file because I was unable to stub out the File.foreach 
 I am create/update two hash maps here.  One is linking which track belongs to which report, and the other is recording the current total score, the total weight, and average score of each track.  I use a hashmap to link the reports to the tracks because in ruby 1.9 and above, the insertion order is kept in a hash, thus fulfilling the FIFO requirement of the Reports during output.
 
 .display_output
-This also uses the data created in the previous step of .calculate to generate the output of the data in this step.  This step is last because we dont know the score of the reports without knowing the scores of the tracks.  Then it is a simple process of looping through all the reports, and the tracks its associated with, and output them in stdout.  
+This also uses the data created in the previous step of .calculate to generate the output of the data in this step.  This step is last because we dont know the score of the reports without knowing the scores of the tracks.  Then it is a simple process of looping through all the reports, and the tracks its associated with, and output them in stdout.
+
+I thought about storing the output to an instance variable and add another step to print it out in generate report but decided against it.  It does not add any additional benefit to the code and now we have to store the output somewhere, which increases memory usage.
 
 Testing
 For each individual method, they are unit tested.  
