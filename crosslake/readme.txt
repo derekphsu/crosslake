@@ -22,7 +22,7 @@ It assumes that the version of Rspec is 3.0 and above
 
 Why I chose this method
 .generate_report
-By listing out the steps it takes to generate the report, it is clear at a glance what steps it needs to take to go from input to output before anyone needs to take a deeper dive into the code.  It also means that each method has a specific purpose and no method is too big, thus making refactoring and reusing it harder.  It is also easy to test.
+By listing out the steps it takes to generate the report, it is clear at a glance what steps it needs to take to go from input to output before anyone needs to take a deeper dive into the code.  It also means that each method has a specific purpose and no method is too big.  It is also easy to test.
 
 .output_file
 I have to create .output_file because I was unable to stub out the File.foreach method in my tests.  Normally I would just add it as the first line in .calculate and leverage the added efficiency in the foreach method.  The current implementation takes extra memory by dumping everything out to .file_content and forgoes the benefit of the foreach loop which only reads one line at a time, thus improving memory usage when the input file is large.  
@@ -40,6 +40,9 @@ For each individual method, they are unit tested.
 .initiate
 I did not test the initiate method as I ran into trouble testing the ARGV aspect of the code.
 
+.generate_report
+Since this is the public method the user would be calling, it would make sense to do an end to end testing.  However since I was having trouble feeding it a test file, this method was not tested extensively.  I did basic unit test to ensure that the 3 methods are being called in here.
+
 .output_file
 This is also not tested because because I was having problems with stubbing out File.foreach. Since File is a built in Ruby/IO code,  it's more important to test the other features of the code and assumes this piece just functions properly.  
 
@@ -48,7 +51,7 @@ This method accepts a predefined format of input as listed out by the schema.  W
 Once we tested for these two variables, then any changes to the code should break the test, thus ensuring that the business logic will remain the same.
 
 .display_output 
-This method requires data that is generated from .calculate.  It is not called elsewhere.  As long as the output to stdout matches expectations, then the test should be 100% coverage.
+This method requires data that is generated from .calculate.  It is not called elsewhere.  The method in a sense is like similar to functional programming, where the same input will always generate the same output.  As long as the output to stdout matches expectations, then the test should be 100% coverage.
 
 .report_to_track, .track_to_indicator, .file_path
 These three methods are not tested as they serve the purpose as instance variables.
